@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git clone --bare https://github.com/manakjiri/home-git $HOME/.home-git
+git clone --bare git@github.com:manakjiri/home-git.git $HOME/.home-git
 
 function home_git {
 	git --git-dir=$HOME/.home-git/ --work-tree=$HOME $@
