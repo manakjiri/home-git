@@ -1,0 +1,21 @@
+#!/bin/sh
+
+git clone --bare https://github.com/manakjiri/home-git $HOME/.home-git
+
+function home-git {
+   /usr/bin/git --git-dir=$HOME/.home-git/ --work-tree=$HOME $@
+}
+
+mkdir -p .home-git-backup
+home-git checkout
+
+if [ $? = 0 ]; then
+  echo "Checked out config.";
+  else
+    echo "Backing up pre-existing dot files.";
+    home-git checkout 2>&1 | grep -E "\s+\." | awk {'print $1'} | xargs -I{} mv {} .home-git-backup/{}
+fi;
+
+home-git checkout
+home-git config status.showUntrackedFiles no
+
