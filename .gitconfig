@@ -1,0 +1,19 @@
+[user]
+	email = 41122948+manakjiri@users.noreply.github.com
+	name = Jiri Manak
+	signingKey = /home/george/.ssh/id_ed25519.pub
+	username = manakjiri
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[submodule]
+	recurse = true
+[push]
+	autoSetupRemote = true
+[core]
+	editor = nano
+[pull]
+	rebase = false
