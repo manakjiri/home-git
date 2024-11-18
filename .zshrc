@@ -31,6 +31,11 @@ else
   export EDITOR='mvim'
 fi
 
+SYSTEM="$(uname -s)"
+if [[ SYSTEM -eq "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # home-git
 alias home-git='/usr/bin/git --git-dir=$HOME/.home-git/ --work-tree=$HOME'
 
@@ -38,9 +43,11 @@ alias home-git='/usr/bin/git --git-dir=$HOME/.home-git/ --work-tree=$HOME'
 export PATH="$PATH:/home/george/.local/bin"
 
 # gems
-# export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
-export PATH="$PATH:$HOME/.rbenv/bin"
-eval "$(rbenv init -)"
+if [ -d "$HOME/.rbenv" ]; then
+  # export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+  export PATH="$PATH:$HOME/.rbenv/bin"
+  eval "$(rbenv init -)"
+fi
 
 # use KDE's file dialog instead of GTK's
 export GTK_USE_PORTAL=1
@@ -50,5 +57,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # flutter and android
-export PATH="$PATH:/home/george/.flutter/flutter"
+export PATH="$PATH:$HOME/.flutter/flutter"
 
