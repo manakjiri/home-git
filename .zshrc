@@ -40,7 +40,7 @@ fi
 alias home-git='/usr/bin/git --git-dir=$HOME/.home-git/ --work-tree=$HOME'
 
 # Created by `pipx` on 2023-07-27 08:43:39
-export PATH="$PATH:/home/george/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # gems
 if [ -d "$HOME/.rbenv" ]; then
@@ -52,12 +52,74 @@ fi
 # use KDE's file dialog instead of GTK's
 export GTK_USE_PORTAL=1
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 # flutter and android
-export PATH="$PATH:$HOME/.flutter/flutter"
+if [ -d "$HOME/.flutter" ]; then
+  export PATH="$PATH:$HOME/.flutter/flutter"
+fi
 
+if [[ SYSTEM -eq "Darwin" ]]; then
+  alias python='python3'
+fi
 
-. "$HOME/.cargo/env"
+if [ -d "$HOME/.cargo" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+if [[ SYSTEM -eq "Darwin" ]]; then
+  _direnv_hook() {
+    trap -- '' SIGINT
+    eval "$("/opt/homebrew/bin/direnv" export zsh)"
+    trap - SIGINT
+  }
+  typeset -ag precmd_functions
+  if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
+    precmd_functions=(_direnv_hook $precmd_functions)
+  fi
+  typeset -ag chpwd_functions
+  if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
+    chpwd_functions=(_direnv_hook $chpwd_functions)
+  fi
+
+  _direnv_hook() {
+    trap -- '' SIGINT
+    eval "$("/opt/homebrew/bin/direnv" export zsh)"
+    trap - SIGINT
+  }
+  typeset -ag precmd_functions
+  if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
+    precmd_functions=(_direnv_hook $precmd_functions)
+  fi
+  typeset -ag chpwd_functions
+  if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
+    chpwd_functions=(_direnv_hook $chpwd_functions)
+  fi
+  eval "$(pyenv init --path)"
+
+  _direnv_hook() {
+    trap -- '' SIGINT
+    eval "$("/opt/homebrew/bin/direnv" export zsh)"
+    trap - SIGINT
+  }
+  typeset -ag precmd_functions
+  if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
+    precmd_functions=(_direnv_hook $precmd_functions)
+  fi
+  typeset -ag chpwd_functions
+  if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
+    chpwd_functions=(_direnv_hook $chpwd_functions)
+  fi
+
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+fi
