@@ -17,3 +17,7 @@
 	editor = nano
 [pull]
 	rebase = false
+
+[includeIf "gitdir:~/projects/applifting/"]
+	path = .gitconfig-applifting
+

@@ -59,3 +59,5 @@ export NVM_DIR="$HOME/.nvm"
 # flutter and android
 export PATH="$PATH:$HOME/.flutter/flutter"
 
+
+. "$HOME/.cargo/env"
