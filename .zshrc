@@ -10,7 +10,7 @@ HYPHEN_INSENSITIVE="true"
 # Uncomment one of the following lines to change the auto-update behavior
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
@@ -21,6 +21,8 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+alias g='/usr/bin/git'
 
 export MANPATH="/usr/local/man:$MANPATH"
 

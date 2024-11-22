@@ -21,3 +21,10 @@
 [includeIf "gitdir:~/projects/applifting/"]
 	path = .gitconfig-applifting
 
+[alias]
+	ch = checkout
+	br = branch
+	co = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
