@@ -23,6 +23,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 alias g='/usr/bin/git'
+alias setup-venv='python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt'
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -37,6 +38,9 @@ SYSTEM="$(uname -s)"
 
 if [ $SYSTEM = "Darwin" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  # Add Visual Studio Code (code)
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
 # home-git
