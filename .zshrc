@@ -68,6 +68,7 @@ fi
 # flutter and android
 if [ -d "$HOME/.flutter" ]; then
   export PATH="$PATH:$HOME/.flutter/flutter"
+  export PATH="$PATH:$HOME/.flutter/flutter/bin"
 fi
 
 if [ $SYSTEM = "Darwin" ]; then
@@ -101,3 +102,6 @@ if [ $SYSTEM = "Darwin" ]; then
 
   export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 fi
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/bin:$PATH

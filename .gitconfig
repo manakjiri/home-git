@@ -15,6 +15,7 @@
 	autoSetupRemote = true
 [core]
 	editor = nano
+	excludesfile = ~/.gitignore_global
 [pull]
 	rebase = false
 
