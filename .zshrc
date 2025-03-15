@@ -103,5 +103,10 @@ if [ $SYSTEM = "Darwin" ]; then
   export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 fi
 
-export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH=$JAVA_HOME/bin:$PATH
+# Disabled because it is only for macos and may not be needed anymore
+# export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+# export PATH=$JAVA_HOME/bin:$PATH
+
+# Increase file descriptor limit
+ulimit -n 2048
+eval "$(direnv hook zsh)"
